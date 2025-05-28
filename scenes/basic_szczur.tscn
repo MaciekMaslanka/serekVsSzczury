@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdfel0r6viqx6"]
+
+[ext_resource type="Shape2D" uid="uid://bq75yxhfbd88f" path="res://sprites/szczurCollider.tres" id="1_0s1ye"]
+[ext_resource type="Script" uid="uid://ce6rlwu7d5yau" path="res://scripts/basicSzczurScript.gd" id="1_wbl67"]
+[ext_resource type="Texture2D" uid="uid://bi5r426udasj4" path="res://sprites/basic szczur.png" id="2_wbl67"]
+[ext_resource type="Texture2D" uid="uid://bs82h2fmfijbi" path="res://sprites/szczurOko.png" id="4_h1p1a"]
+
+[node name="BasicSzczur" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_wbl67")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 1)
+scale = Vector2(0.335, 0.161)
+shape = ExtResource("1_0s1ye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("2_wbl67")
+
+[node name="LeftEye" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(49.825, -21.334)
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("4_h1p1a")
+
+[node name="RightEye" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(48.645, 25.685)
+scale = Vector2(0.045, 0.045)
+texture = ExtResource("4_h1p1a")
