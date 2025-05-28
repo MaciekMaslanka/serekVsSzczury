@@ -1,3 +1,3 @@
-TODO:
-- podążanie oka szczura za graczem
-- 
+DO ZROBIENIA:
+- w pizde rzeczy
+- sequel
