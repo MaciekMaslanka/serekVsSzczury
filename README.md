@@ -1,3 +1,3 @@
 DO ZROBIENIA:
 - w pizde rzeczy
-- sequel
+- sequel pt:"SerekvsSzczury: zemsta cheddara"
