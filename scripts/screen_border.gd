@@ -17,7 +17,7 @@ func updateScreenSize():
 	var ScreenSize = get_viewport_rect().size
 	#góra
 	Top.shape.size = Vector2(ScreenSize.x, margin)
-	Top.position = Vector2(ScreenSize.x / 2.0, -margin / 2);
+	Top.position = Vector2(ScreenSize.x / 2.0, -margin / 2.0);
 	
 	#dół
 	Bottom.shape.size = Vector2(ScreenSize.x, margin);

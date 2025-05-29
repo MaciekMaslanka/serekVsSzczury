@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bq2mpqfvf8lwn"]
+
+[ext_resource type="Script" uid="uid://by3tdxs1mjc44" path="res://scripts/bulletSzczurScript.gd" id="1_eloa4"]
+[ext_resource type="Texture2D" uid="uid://bi5r426udasj4" path="res://sprites/basic szczur.png" id="1_ymmvd"]
+[ext_resource type="Texture2D" uid="uid://bs82h2fmfijbi" path="res://sprites/szczurOko.png" id="2_pun0a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eloa4"]
+radius = 15.0289
+
+[node name="bullet_szczur" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_eloa4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.14, 0.14)
+texture = ExtResource("1_ymmvd")
+
+[node name="LeftEye" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(52.605, -23.41)
+scale = Vector2(-0.055, -0.055)
+texture = ExtResource("2_pun0a")
+
+[node name="RightEye" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(54.095, 26.495)
+scale = Vector2(0.055, 0.055)
+texture = ExtResource("2_pun0a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0.355)
+scale = Vector2(0.875, 0.385)
+shape = SubResource("CircleShape2D_eloa4")

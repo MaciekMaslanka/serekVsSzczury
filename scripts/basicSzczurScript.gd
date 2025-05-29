@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var bullet: PackedScene = preload("res://scenes/bullet_szczur.tscn")
 @onready var leftEye = $Sprite2D/LeftEye
 @onready var rightEye = $Sprite2D/RightEye
 @export var maxEyeOffset: float = 5;
@@ -7,9 +8,9 @@ extends CharacterBody2D
 var leftBasePos = Vector2.ZERO
 var rightBasePos = Vector2.ZERO
 
-@export var speed = 100;
-@export var rotationFromWalls = 0.5;
-@export var rotationToPlayer:float = 0
+@export var speed = 175;
+@export var rotationFromWalls = 0.2;
+@export var rotationToPlayer:float = 0.15
 @onready var player = get_node("/root/Node2D/Player") #pobranie nodea gracza
 
 var direction = Vector2.ZERO

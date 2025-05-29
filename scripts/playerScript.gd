@@ -24,10 +24,6 @@ func _physics_process(delta: float) -> void:
 		
 	direction = direction.normalized()
 	velocity = direction * speed
-	
-	if (direction.length() > 0):
-		var targetAngle = direction.angle();
-		rotation = lerp_angle(rotation, targetAngle, delta * rotationSpeed)
 		
 	move_and_slide()
 		

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://1no7l1nv2iyo"]
+
+[ext_resource type="PackedScene" uid="uid://bdfel0r6viqx6" path="res://scenes/basic_szczur.tscn" id="1_ad8c1"]
+[ext_resource type="Script" uid="uid://dhs7nwq2d4fh6" path="res://scripts/2ShotsSzczur.gd" id="2_v4lo5"]
+
+[node name="BasicSzczur" instance=ExtResource("1_ad8c1")]
+script = ExtResource("2_v4lo5")
+speed = 175
+
+[node name="attackTimer" type="Timer" parent="." index="2"]
+wait_time = 0.6
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]
