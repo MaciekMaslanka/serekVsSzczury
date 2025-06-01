@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://u28jvqkw60qf"]
+
+[ext_resource type="PackedScene" uid="uid://bdfel0r6viqx6" path="res://scenes/basic_szczur.tscn" id="1_m18k8"]
+[ext_resource type="Script" uid="uid://wbiv3axo7sl" path="res://scripts/shotgunSzczurScript.gd" id="2_n8ri7"]
+
+[node name="BasicSzczur" instance=ExtResource("1_m18k8")]
+script = ExtResource("2_n8ri7")
+
+[connection signal="timeout" from="attackTimer" to="." method="_on_attack_timer_timeout"]

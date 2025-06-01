@@ -5,7 +5,7 @@ func shoot():
 	var bulletInstance = bullet.instantiate() 
 	bulletInstance.global_position = global_position
 	bulletInstance.rotation = toPlayer
-	bulletInstance.speed = 500
+	bulletInstance.speed = 700
 	bulletInstance.bounceFromWalls = false
 	get_tree().current_scene.add_child(bulletInstance)
 

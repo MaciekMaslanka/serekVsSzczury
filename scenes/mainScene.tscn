@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cyyciqox1shia"]
+[gd_scene load_steps=8 format=3 uid="uid://cyyciqox1shia"]
 
 [ext_resource type="Script" uid="uid://b8phl3obdhdjx" path="res://scripts/screen_border.gd" id="1_ki6c0"]
 [ext_resource type="PackedScene" uid="uid://xf0omu7kqbxd" path="res://scenes/player.tscn" id="2_8ifl6"]
-[ext_resource type="PackedScene" uid="uid://cggda7mupou86" path="res://scenes/12ShotSzczur.tscn" id="3_twn0q"]
-[ext_resource type="PackedScene" uid="uid://1no7l1nv2iyo" path="res://scenes/2ShotSzczur.tscn" id="4_hhxvm"]
+[ext_resource type="PackedScene" uid="uid://u28jvqkw60qf" path="res://scenes/shotgunSzczur.tscn" id="5_w16ng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ifl6"]
 size = Vector2(274, 20)
@@ -44,10 +43,5 @@ shape = SubResource("RectangleShape2D_w16ng")
 position = Vector2(456, 352)
 speed = 400
 
-[node name="BasicSzczur" parent="." instance=ExtResource("3_twn0q")]
-position = Vector2(632, 240)
-speed = 175
-
-[node name="BasicSzczur2" parent="." instance=ExtResource("4_hhxvm")]
-position = Vector2(640, 144)
-speed = 175
+[node name="BasicSzczur3" parent="." instance=ExtResource("5_w16ng")]
+position = Vector2(296, 224)

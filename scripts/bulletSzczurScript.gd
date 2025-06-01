@@ -4,6 +4,7 @@ var direction = Vector2.ZERO
 var collisionCounter: int = 0
 
 @export var bounceFromWalls: bool = false
+@export var bounceAmount: int = 2
 @export var speed: float = 300
 @export var despawnDistance: float = 20
 
@@ -18,15 +19,18 @@ func _physics_process(delta: float) -> void:
 		var targetRotation = direction.angle()
 		rotation = lerp_angle(rotation, targetRotation, 0.3)
 		var collision = move_and_collide(direction * delta)
-		if collision:
+		if collision and collisionCounter < bounceAmount:
+			collisionCounter += 1
 			var normal = collision.get_normal()
 			direction = direction.bounce(normal).normalized() * speed
 			
 			position += direction * 0.05 #odsunięcie od ściany żeby się nie jebło
+		elif collisionCounter >= bounceAmount:
+			set_collision_mask_value(3, false)
 	else:
 		velocity = direction
 		move_and_slide()
-		checkForDespawn()
+	checkForDespawn()
 
 func checkForDespawn():
 	var screen = get_viewport_rect().size
