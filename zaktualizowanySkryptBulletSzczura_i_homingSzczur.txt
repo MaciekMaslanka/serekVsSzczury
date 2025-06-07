@@ -1,0 +1,95 @@
+//////////////////////////////////////////////BulletSzczur///////////////////////////////////////////
+extends CharacterBody2D
+
+var direction = Vector2.ZERO
+var collisionCounter: int = 0
+
+@export var bounceFromWalls: bool = false
+@export var bounceAmount: int = 2
+@export var homing: bool = false
+@export var homingRadius: float = 0 #max obrót (Radiany na sekunde)
+@export var homingRange: float = 0 #zasięg samonaprowdzania gracza
+@export var speed: float = 300
+@export var despawnDistance: float = 20
+
+func _ready() -> void:
+	direction = Vector2.RIGHT.rotated(rotation);
+	direction = direction.normalized() * speed
+	
+	set_collision_mask_value(3, bounceFromWalls)
+		
+func _physics_process(delta: float) -> void:
+	if homing:
+		apply_homing(delta)
+	if bounceFromWalls:
+		var targetRotation = direction.angle()
+		rotation = lerp_angle(rotation, targetRotation, 0.3)
+		var collision = move_and_collide(direction * delta)
+		if collision and collisionCounter < bounceAmount:
+			collisionCounter += 1
+			var normal = collision.get_normal()
+			direction = direction.bounce(normal).normalized() * speed
+			
+			position += direction * 0.05 #odsunięcie od ściany żeby się nie jebło
+		elif collisionCounter >= bounceAmount:
+			set_collision_mask_value(3, false)
+	else:
+		velocity = direction
+		move_and_slide()
+	checkForDespawn()
+
+func apply_homing(delta: float) -> void:
+	var player = get_node("/root/Node2D/Player")
+	if player:
+		var to_player = player.global_position - global_position
+		var distance = to_player.length()
+
+		if distance < homingRange:
+			var desired_angle = to_player.angle()
+			var max_rotation = homingRadius * delta
+			rotation = lerp_angle(rotation, desired_angle, min(1.0, max_rotation / abs(angular_distance(rotation, desired_angle))))
+			direction = Vector2.RIGHT.rotated(rotation).normalized() * speed
+
+func angular_distance(a: float, b: float) -> float:
+	return abs(wrapf(b - a + PI, 0.0, 2.0 * PI) - PI) #sprawdza w którą strone ma się obracać szczur (chyba)
+
+func checkForDespawn():
+	var screen = get_viewport_rect().size
+	var expanded_screen = Rect2(
+		Vector2(-despawnDistance, -despawnDistance),
+		screen + Vector2(despawnDistance * 2, despawnDistance * 2)
+	)
+
+	if not expanded_screen.has_point(position):
+		queue_free()
+		#do testów - wraca na środek mapy i obraca się w losowym kierunku
+		#position = screen / 2
+		#var rng = RandomNumberGenerator.new()
+		#rng.randomize()
+		#var angle = deg_to_rad(rng.randi_range(0, 360))
+		#direction = Vector2.RIGHT.rotated(angle)
+		#rotation = angle
+		#collisionCounter = 0
+//////////////////////////////////////////////////////////HomingSzczur///////////////////////////////////////
+extends "res://scripts/basicSzczurScript.gd"
+
+func shoot():
+	var offsets = [0, 1.57, 3.14, 4.71] #offsety ataku
+	for offset in offsets:
+		var instance = bullet.instantiate()
+		instance.global_position = global_position
+		instance.rotation = offset
+		instance.bounceFromWalls = false
+		instance.homing = true
+		instance.homingRadius = 1.5
+		instance.homingRange = 400
+		instance.speed = 300
+		get_tree().current_scene.add_child(instance)
+		
+func _on_attack_timer_timeout() -> void:
+	var rng = RandomNumberGenerator.new();
+	rng.randomize();
+	if bullet:
+		shoot();
+		$attackTimer.wait_time = rng.randf_range(3, 5)
+		$attackTimer.start()
